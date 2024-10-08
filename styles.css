@@ -1,0 +1,74 @@
+@font-face {
+    font-family: 'bahn';
+    src: url(./BAHNSCHRIFT.TTF);
+}
+
+:root {
+    --light-grey: #595858;
+    --text-color: #ccc;
+}
+
+html {
+    font-size: 100%;
+    font-family: 'bahn', 'arial', 'san-serif';
+}
+
+body {
+    margin: 0.6rem;
+    color: #fff;
+    background-color: hsl(0, 1%, 16%);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+input::placeholder {
+    color: var(--text-color);
+}
+
+.plus-sign {
+    font-size: 2rem;
+    color: var(--text-color);
+    width: fit-content;
+    padding: 0.1rem 0.6rem;
+    cursor: pointer;
+}
+
+.plus-sign:hover {
+    background-color: var(--light-grey);
+}
+
+h1 {
+    margin: 0 0 0.6rem 0;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: var(--light-grey);
+}
+
+.search-container:focus-within input::placeholder{
+    color: #a2a0a0;
+}
+
+input {
+    outline: none;
+    border: 0;
+    padding: 0.6rem 0  0.6rem 0.6rem;
+    background-color: transparent;
+    color: var(--text-color);
+    width: 100%;
+}
+
+label {
+    border:0;
+    padding-right: 0.6rem;
+}
+
+.search-icon {
+    margin-top: 0.2rem;
+    transform: rotate(90deg);
+    fill: var(--text-color);
+}

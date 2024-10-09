@@ -17,6 +17,8 @@ window.addEventListener('click', (event) => {
     } else if (event.target.matches('.outer-shell')) {
         toggleSomething();
         textareaElement.value = '';
+    } else if (event.target !== event.target.matches('.js-menu-icon')) {
+        removeMenu();
     }
 });
 
@@ -66,11 +68,18 @@ function saveToStorage(name, variable) {
 function displayData() {
     let textHTML = '';
 
-    textArray.forEach((textcontent) => {
+    textArray.forEach((textcontent, index) => {
         textHTML += `
             <div id="list-item-container" class="list-item-container" data-id=${textcontent.id}>
                 <div class="list-item">
                 ${textcontent.content}
+                </div>
+                <div class="menu-icon js-menu-icon" data-id=${textcontent.id}>...</div>
+                <div class="menu-list menu-list-${textcontent.id}">
+                    <ul>
+                        <li data-id=${textcontent.id}>Open note</li>
+                        <li class="delete-btn" data-id=${index}>Delete note</li>
+                    </ul>
                 </div>
             </div>
         `;
@@ -86,11 +95,50 @@ function displayData() {
                 const {id} = container.dataset;
                 
                 editText(id);
-            })
+            });
         });
+    
+    const dotElement = document.querySelectorAll('.js-menu-icon');
+
+    dotElement.forEach((dot) => {
+        dot.addEventListener('click', (event) => {
+            removeMenu();
+
+            const {id} = dot.dataset;
+            event.stopPropagation();
+            
+            const currentSelector = document.querySelector(`.menu-list-${id}`);
+            currentSelector.style.opacity = '1';
+            currentSelector.style.pointerEvents = 'all';
+            currentSelector.style.transform = 'translateY(0px)';
+        });
+    });
+
+    const deleteButton = document.querySelectorAll('.delete-btn');
+
+    deleteButton.forEach((link) => {
+        link.addEventListener('click', (event) => {
+            event.stopPropagation();
+
+            const {id} = link.dataset;
+            textArray.splice(id, 1);
+            saveToStorage('arraylist', textArray);
+            displayData();
+        });
+    });
+
 }
 
-displayData();
+function removeMenu() {
+    const currentSelector = document.querySelectorAll(`.menu-list`);
+
+    currentSelector.forEach((selector) => {
+        selector.style.opacity = '';
+        selector.style.pointerEvents = '';
+        selector.style.zIndex = '';
+        selector.style.transform = '';
+    })
+}
 
 function editText(id) {
     const data = textArray.find((textcontent) => {
@@ -106,3 +154,5 @@ function editText(id) {
 function toggleSomething() {
     bodyElement.toggleAttribute('plus');
 }
+
+displayData();

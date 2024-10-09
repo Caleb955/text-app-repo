@@ -6,6 +6,7 @@
 :root {
     --light-grey: #595858;
     --text-color: #ccc;
+    --background-color: hsl(0, 1%, 16%);
 }
 
 html {
@@ -16,7 +17,7 @@ html {
 body {
     margin: 0.6rem;
     color: #fff;
-    background-color: hsl(0, 1%, 16%);
+    background-color: var(--background-color);
 }
 
 *, *::before, *::after {
@@ -152,6 +153,7 @@ label {
     padding: 0.6em;
     background-color: var(--light-grey);
     cursor: pointer;
+    position: relative;
 }
 
 .list-item {
@@ -162,3 +164,52 @@ label {
     font-family: 'arial';
     user-select: none;
 }
+
+.menu-icon {
+    position: absolute;
+    top: 0;
+    right: 0.6em;
+    letter-spacing: 0.2em;
+    opacity: 0.6;
+}
+
+.menu-icon:hover {
+    opacity: 1;
+}
+
+.menu-icon:active {
+    opacity: 1;
+}
+
+.menu-list {
+    position: absolute;
+    top: 1.2em;
+    right: 0;
+    background-color: var(--background-color);
+    border: 1px solid #000;
+    padding: 0.6em 0.4em;
+    pointer-events: none;
+    transform: translateY(-100%);
+    transition: transform .4s ease-in-out, opacity .1s ease-in-out;
+    opacity: 0;
+    z-index: 1;
+}
+
+.menu-list > ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.2em;
+    font-family: 'Arial';
+}
+
+.menu-list > ul > li {
+    padding: 0.6em;
+    border-radius: 0.4em;
+}
+
+.menu-list > ul > li:hover {
+    background-color: #4d4c4c;
+}
+

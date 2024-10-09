@@ -72,3 +72,71 @@ label {
     transform: rotate(90deg);
     fill: var(--text-color);
 }
+
+.text-preview-context {
+    position: fixed;
+    inset: 10% 15%;
+    display: block;
+    background-color: var(--light-grey);
+}
+
+#data-list {
+    border: 2px solid orange;
+}
+
+[class="text-preview-context"] {
+    transform: scale(0.6);
+    transition: transform .4s ease-in-out, opacity .4s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+}
+
+[class="text-preview-context"] > textarea {
+    min-height: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    outline: none;
+    border: none;
+    font-family: inherit;
+    background-color: var(--light-grey);
+    color: #fff;
+    caret-color: limegreen;
+    padding: 0.6em;
+}
+
+[class="text-preview-context"] > textarea::placeholder {
+    color: var(--text-color);
+}
+
+
+[plus] [class="text-preview-context"] {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: all;
+}
+
+#save-btn {
+    all: unset;
+    background-color: limegreen;
+    padding: 0.4em;
+    border-radius: 0.2em;
+    position: absolute;
+    bottom: 0.6em;
+    right: 0.6em;
+    cursor: pointer;
+}
+
+#save-btn:hover {
+    background-color: hsla(120, 61%, 50%, 0.859);
+}
+
+#save-btn:active {
+    cursor: progress;
+}
+
+[plus] .outer-shell {
+    outline: 5px solid limegreen;
+    position: fixed;
+    inset: 0;
+}

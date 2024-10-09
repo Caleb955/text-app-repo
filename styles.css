@@ -103,10 +103,13 @@ label {
     color: #fff;
     caret-color: limegreen;
     padding: 0.6em;
+    font-family:  'Arial', 'san-serif';
+    letter-spacing: 0.1em;
 }
 
 [class="text-preview-context"] > textarea::placeholder {
     color: var(--text-color);
+    font-family: 'bahn';
 }
 
 
@@ -127,11 +130,8 @@ label {
     cursor: pointer;
 }
 
-#save-btn:hover {
-    background-color: hsla(120, 61%, 50%, 0.859);
-}
-
 #save-btn:active {
+    background-color: hsla(120, 61%, 50%, 0.859);
     cursor: progress;
 }
 

@@ -86,7 +86,7 @@ label {
 
 [class="text-preview-context"] {
     transform: scale(0.6);
-    transition: transform .4s ease-in-out, opacity .4s ease-in-out;
+    transition: transform .4s, opacity .1s;
     opacity: 0;
     pointer-events: none;
 }
@@ -139,4 +139,26 @@ label {
     outline: 5px solid limegreen;
     position: fixed;
     inset: 0;
+}
+
+.data-text {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+}
+
+[id="list-item-container"] {
+    padding: 0.6em;
+    background-color: var(--light-grey);
+    cursor: pointer;
+}
+
+.list-item {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+    font-family: 'arial';
+    user-select: none;
 }

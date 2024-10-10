@@ -3,11 +3,12 @@ const bodyElement = document.documentElement;
 const textContainer = document.querySelector('.js-data-list');
 const saveButton = document.getElementById('save-btn');
 
+
 let textArray = JSON.parse(localStorage.getItem('arraylist')) || [];
 
-let counterId = JSON.parse(localStorage.getItem('counter'));
+let counterId = JSON.parse(localStorage.getItem('counter')) || 0;
 
-window.addEventListener('click', (event) => {
+document.addEventListener('click', (event) => {
     if (event.target.matches('textarea')) {
         return;
     } else if (event.target.matches('.js-plus-sign')) {
@@ -17,6 +18,7 @@ window.addEventListener('click', (event) => {
     } else if (event.target.matches('.outer-shell')) {
         toggleSomething();
         textareaElement.value = '';
+        saveButton.setAttribute('data-id', '')
     } else if (event.target !== event.target.matches('.js-menu-icon')) {
         removeMenu();
     }
@@ -29,29 +31,34 @@ function passData() {
         return;
     } else {
         const {id} = saveButton.dataset;
-        
+                
         let matchingId;
 
         textArray.forEach((content) => {
-            if (content.id === id) {
+            if (content.id === Number(id)) {
                 matchingId = content;
             }
         });
 
         if (matchingId) {
             matchingId.content = data;
+            saveToStorage('arraylist', textArray)
             toggleSomething();
+
+
             displayData();
             textareaElement.value = '';
+            saveButton.setAttribute('data-id', '')
         } else {
             textArray.unshift({
                 content: data,
-                id: String(counterId += 1)
+                id: counterId += 1
             });
         
             displayData();
         
             saveToStorage('counter', counterId);
+            saveToStorage('arraylist', textArray)
         
             textareaElement.value = '';
         
@@ -87,14 +94,12 @@ function displayData() {
 
     textContainer.innerHTML = textHTML;
 
-    saveToStorage('arraylist', textArray);
-
     document.querySelectorAll('.list-item-container')
         .forEach((container) => {
             container.addEventListener('click', () => {
                 const {id} = container.dataset;
                 
-                editText(id);
+                editText(Number(id));
             });
         });
     
@@ -142,12 +147,13 @@ function removeMenu() {
 
 function editText(id) {
     const data = textArray.find((textcontent) => {
-        return textcontent.id === id
+        return textcontent.id === id;
     });
 
     toggleSomething();
 
     textareaElement.value = data.content;
+
     saveButton.setAttribute('data-id', id)
 }
 
